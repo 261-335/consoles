@@ -165,7 +165,7 @@ int main(int, char **) {
     bool cont = true;
 
     while (cont) {
-        cout << endl << "Выберите номер команды" << endl;
+        cout << endl << "Выберите номер задачи" << endl;
 
         int commandNumber = -1;
         do {
