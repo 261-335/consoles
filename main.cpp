@@ -124,9 +124,39 @@ void list_backwards() {
 
 // добавьте свою функцию здесь
 
+void sum_by_company() {
+    size_t consolesSize = std::size(consoles);
+    string companies[100];
+    double sums[100];
+    int count = 0;
+
+    for (int i = 0; i < consolesSize; i++) {
+        int index = -1;
+        for (int j = 0; j < count; j++) {
+            if (companies[j] == consoles[i].company_name) {
+                index = j;
+                break;
+            }
+        }
+        if (index == -1) {
+            companies[count] = consoles[i].company_name;
+            sums[count] = consoles[i].units_sold_mil;
+            count++;
+        } else {
+            sums[index] += consoles[i].units_sold_mil;
+        }
+    }
+
+    for (int i = 0; i < count; i++) {
+        cout << std::left << setw(30) << companies[i] << " "
+             << sums[i] << " млн" << endl;
+    }
+}
+
 enum Command {
     List,
     ListBackwards,
+    SumByCompany,
     // добавьте сюда идентификатор команды
     Exit
 };
@@ -134,7 +164,8 @@ enum Command {
 string command_description(Command command) {
     switch (command) {
         case List: return "Вывести список консолей";
-        case ListBackwards: return "Вывести список консолей в обратном порядке";
+        case ListBackwards: return "Вывести спис2ок консолей в обратном порядке";
+        case SumByCompany: return "Вывести сумму проданных моделей по производителям";
         // добавьте сюда описание команды
         case Exit: return "Выход";
         default:
@@ -151,6 +182,9 @@ void perform_command(Command command) {
             break;
         case ListBackwards:
             list_backwards();
+            break;
+        case SumByCompany:
+            sum_by_company();
             break;
         // добавьте вызов своей функции здесь. не забудьте break
         default:
