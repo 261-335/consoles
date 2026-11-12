@@ -124,24 +124,28 @@ void list_backwards() {
 
 // добавьте свою функцию здесь
 
-void print(string str){
-    cout << str << endl;
-}
-void print(int str) {
-    cout << str << endl;
-}
 void print_() {
-    print("Hellow, world");
+    cout << "Hellow, world";
 }
 void serch_maker() {
     size_t consolesSize = size(consoles);
     char letter;
-    print("Введите первую букву производителя: ");
+    cout << "Введите первую букву производителя: ";
     cin >> letter;
     for (int i = 0; i < consolesSize; i++) {
         if (consoles[i].company_name[0] == letter)
             cout << console_to_string(consoles[i]) << endl;
     }
+}
+void print_oldest_console() {
+    size_t consolesSize = size(consoles);
+    int temp = consoles[0].release_year;
+    for (int i = 0; i < consolesSize; i++) {
+        if (consoles[i].release_year < temp) {
+            temp = i;
+        }
+    }
+    cout << "Самая старая консоль это - " << consoles[temp].name;
 }
 
 
@@ -150,6 +154,7 @@ enum Command {
     ListBackwards,
     print_hi,
     Search_company_name,
+    OutPut_OldConsole,
     // добавьте сюда идентификатор команды
     Exit
 };
@@ -160,6 +165,7 @@ string command_description(Command command) {
         case ListBackwards: return "Вывести список консолей в обратном порядке";
         case print_hi: return "Выводит надпись 'Hellow world'";
         case Search_company_name: return "Выводит консоли от производителей на заданную букву";
+        case OutPut_OldConsole: return "Выводит название самой старой консоли";
         // добавьте сюда описание команды
         case Exit: return "Выход";
         default:
@@ -182,6 +188,10 @@ void perform_command(Command command) {
             break;
         case Search_company_name:
             serch_maker();
+            break;
+        case OutPut_OldConsole:
+            print_oldest_console();
+            break;
         // добавьте вызов своей функции здесь. не забудьте break
         default:
             cout << "Действие команды не определено" << endl;
