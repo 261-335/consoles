@@ -124,9 +124,32 @@ void list_backwards() {
 
 // добавьте свою функцию здесь
 
+void print(string str){
+    cout << str << endl;
+}
+void print(int str) {
+    cout << str << endl;
+}
+void print_() {
+    print("Hellow, world");
+}
+void serch_maker() {
+    size_t consolesSize = size(consoles);
+    char letter;
+    print("Введите первую букву производителя: ");
+    cin >> letter;
+    for (int i = 0; i < consolesSize; i++) {
+        if (consoles[i].company_name[0] == letter)
+            cout << console_to_string(consoles[i]) << endl;
+    }
+}
+
+
 enum Command {
     List,
     ListBackwards,
+    print_hi,
+    Search_company_name,
     // добавьте сюда идентификатор команды
     Exit
 };
@@ -135,6 +158,8 @@ string command_description(Command command) {
     switch (command) {
         case List: return "Вывести список консолей";
         case ListBackwards: return "Вывести список консолей в обратном порядке";
+        case print_hi: return "Выводит надпись 'Hellow world'";
+        case Search_company_name: return "Выводит консоли от производителей на заданную букву";
         // добавьте сюда описание команды
         case Exit: return "Выход";
         default:
@@ -152,6 +177,11 @@ void perform_command(Command command) {
         case ListBackwards:
             list_backwards();
             break;
+        case print_hi:
+            print_();
+            break;
+        case Search_company_name:
+            serch_maker();
         // добавьте вызов своей функции здесь. не забудьте break
         default:
             cout << "Действие команды не определено" << endl;
