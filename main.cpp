@@ -2,6 +2,9 @@
 #include <sstream>
 #include <iomanip>
 #include <iterator>
+#include <algorithm>
+#include <map>
+#include <vector>
 using namespace std;
 
 enum ConsoleType {
@@ -122,6 +125,8 @@ void list_backwards() {
     }
 }
 
+
+
 // добавьте свою функцию здесь
 
 void print_() {
@@ -147,6 +152,41 @@ void print_oldest_console() {
     }
     cout << "Самая старая консоль это - " << consoles[temp].name;
 }
+void sort_by_company_and_year() {
+    int sorting;
+    cout << "Как остсортировать список консолей?\n1 - сортировка по производителм\n2 - сортировка по годам" << endl;
+    cout << "Ваш выбор: ";
+    cin >> sorting;
+
+    size_t consolesSize = std::size(consoles);
+
+    if (sorting == 1) {
+        // Сортировка по производителю, а при равенстве — по году
+        std::sort(consoles, consoles + consolesSize, [](const Console& a, const Console& b) {
+            if (a.company_name != b.company_name) {
+                return a.company_name < b.company_name;
+            }
+            return a.release_year < b.release_year;
+            });
+        cout << "\n--- Список отсортирован по производителю ---" << endl;
+        list();
+
+    }
+    else if (sorting == 2) {
+        std::sort(consoles, consoles + consolesSize, [](const Console& a, const Console& b) {
+            if (a.release_year != b.release_year) {
+                return a.release_year < b.release_year;
+            }
+            return a.name < b.name;
+            });
+        cout << "\n--- Список отсортирован по году выпуска ---" << endl;
+        list(); 
+
+    }
+    else {
+        cout << "Неверный выбор. Возврат в главное меню." << endl;
+    }
+}
 
 
 enum Command {
@@ -155,6 +195,8 @@ enum Command {
     print_hi,
     Search_company_name,
     OutPut_OldConsole,
+    Sort_consoles,
+
     // добавьте сюда идентификатор команды
     Exit
 };
@@ -166,6 +208,7 @@ string command_description(Command command) {
         case print_hi: return "Выводит надпись 'Hellow world'";
         case Search_company_name: return "Выводит консоли от производителей на заданную букву";
         case OutPut_OldConsole: return "Выводит название самой старой консоли";
+        case Sort_consoles: return "Выводит отсортированный список по производителю и по годам";
         // добавьте сюда описание команды
         case Exit: return "Выход";
         default:
@@ -192,6 +235,10 @@ void perform_command(Command command) {
         case OutPut_OldConsole:
             print_oldest_console();
             break;
+        case Sort_consoles:
+            sort_by_company_and_year();
+            break;
+
         // добавьте вызов своей функции здесь. не забудьте break
         default:
             cout << "Действие команды не определено" << endl;
