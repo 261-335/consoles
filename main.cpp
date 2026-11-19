@@ -163,9 +163,9 @@ enum Command {
 
 string command_description(Command command) {
     switch (command) {
-        case List: return "Вывести список консолей";
-        case ListBackwards: return "Вывести список консолей в обратном порядке";
-        case SumByCompany: return "Вывести сумму проданных моделей по производителям";
+        case List: return "Вывести все консолеи";
+        case ListBackwards: return "Вывести все консоли в обратном порядке";
+        case SumByCompany: return "Вывести сумму проданных консолей по производителям";
         // добавьте сюда описание команды
         case Exit: return "Выход";
         default:
