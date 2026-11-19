@@ -165,7 +165,7 @@ string command_description(Command command) {
     switch (command) {
         case List: return "Вывести все консолеи";
         case ListBackwards: return "Вывести все консоли в обратном порядке";
-        case SumByCompany: return "Вывести сумму проданных единиц по производителям";
+        case SumByCompany: return "Вывести сумму проданных консолей по производителям";
         // добавьте сюда описание команды
         case Exit: return "Выход";
         default:
